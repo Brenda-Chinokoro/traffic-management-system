@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Traffic Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container flex justify-between align-center">
+            <a href="dashboard.html" class="navbar-brand">
+                <i class="fas fa-traffic-light"></i> Traffic Management System
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link user-menu">
+                        <img src="https://via.placeholder.com/32" alt="User Avatar" class="user-avatar">
+                        <span>Admin User</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-item">
+                <a href="dashboard.html" class="sidebar-link active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="monitoring.html" class="sidebar-link">
+                    <i class="fas fa-video"></i>
+                    <span>Traffic Monitoring</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="reports.html" class="sidebar-link">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports & Analytics</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="settings.html" class="sidebar-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="index.html" class="sidebar-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Dashboard Overview</h1>
+            <p>Welcome back, Brenda. Here's what's happening in your traffic network.</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon bg-primary">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="stat-details">
+                    <h3>10,450</h3>
+                    <p>Vehicle Count Today</p>
+                    <span class="stat-change increase">+8% <i class="fas fa-arrow-up"></i></span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon bg-success">
+                    <i class="fas fa-traffic-light"></i>
+                </div>
+                <div class="stat-details">
+                    <h3>42</h3>
+                    <p>Active Signals</p>
+                    <span class="stat-change">100% <i class="fas fa-check"></i></span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon bg-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-details">
+                    <h3>3</h3>
+                    <p>Traffic Alerts</p>
+                    <span class="stat-change decrease">-25% <i class="fas fa-arrow-down"></i></span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon bg-danger">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-details">
+                    <h3>24 min</h3>
+                    <p>Avg. Delay</p>
+                    <span class="stat-change increase">+2% <i class="fas fa-arrow-up"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traffic Map -->
+        <div class="card map-card">
+            <div class="card-header">
+                <h2>Real-Time Traffic Map</h2>
+                <div class="map-controls">
+                    <button class="btn btn-sm" id="refreshMap"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    <button class="btn btn-sm btn-secondary" id="toggleTraffic">
+                        <i class="fas fa-layer-group"></i> Toggle Traffic
+                    </button>
+                    <select class="btn btn-sm btn-outline" id="mapViewSelector">
+                        <option value="traffic">Traffic View</option>
+                        <option value="roadwork">Roadwork</option>
+                        <option value="incidents">Incidents</option>
+                    </select>
+                </div>
+            </div>
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <!-- Traffic Summary Panel (NEW) -->
+        <div class="card traffic-summary-card">
+            <div class="card-header">
+                <h2>Traffic Summary</h2>
+                <div class="summary-controls">
+                    <button class="btn btn-sm" id="refreshSummary"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    <span class="last-updated">Last updated: <time id="updateTime">12:43 PM</time></span>
+                </div>
+            </div>
+            <div class="traffic-summary-container">
+                <!-- Summary Overview -->
+                <div class="traffic-overview">
+                    <div class="traffic-status-item">
+                        <div class="status-circle">
+                            <div class="circle-progress" style="--percentage: 35%;"></div>
+                            <span>35%</span>
+                        </div>
+                        <p>City Network Congestion</p>
+                    </div>
+                    <div class="traffic-indicators">
+                        <div class="indicator-group">
+                            <div class="indicator-label">
+                                <span class="color-dot green"></span>
+                                <span>Clear Roads</span>
+                            </div>
+                            <div class="indicator-value">65%</div>
+                        </div>
+                        <div class="indicator-group">
+                            <div class="indicator-label">
+                                <span class="color-dot yellow"></span>
+                                <span>Moderate Traffic</span>
+                            </div>
+                            <div class="indicator-value">25%</div>
+                        </div>
+                        <div class="indicator-group">
+                            <div class="indicator-label">
+                                <span class="color-dot red"></span>
+                                <span>Heavy Congestion</span>
+                            </div>
+                            <div class="indicator-value">10%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Major Routes -->
+                <div class="major-routes">
+                    <h3>Major Routes Status</h3>
+                    <div class="routes-grid">
+                        <div class="route-card">
+                            <div class="route-header">
+                                <h4>Second Street</h4>
+                                <span class="traffic-badge red">Heavy</span>
+                            </div>
+                            <div class="route-details">
+                                <div class="route-metric">
+                                    <i class="fas fa-car"></i>
+                                    <span>1,245 vehicles/hr</span>
+                                </div>
+                                <div class="route-metric">
+                                    <i class="fas fa-clock"></i>
+                                    <span>+18 min delay</span>
+                                </div>
+                                <div class="route-speed">
+                                    <span class="speed-value">12</span>
+                                    <span class="speed-unit">km/h</span>
+                                </div>
+                            </div>
+                            <div class="route-trend">
+                                <div class="mini-trend">
+                                    <div class="trend-bar" style="height: 40%"></div>
+                                    <div class="trend-bar" style="height: 60%"></div>
+                                    <div class="trend-bar" style="height: 80%"></div>
+                                    <div class="trend-bar active" style="height: 90%"></div>
+                                </div>
+                                <span class="trend-indicator up">
+                                    <i class="fas fa-arrow-up"></i> Worsening
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="route-card">
+                            <div class="route-header">
+                                <h4>Samora Machel</h4>
+                                <span class="traffic-badge yellow">Moderate</span>
+                            </div>
+                            <div class="route-details">
+                                <div class="route-metric">
+                                    <i class="fas fa-car"></i>
+                                    <span>950 vehicles/hr</span>
+                                </div>
+                                <div class="route-metric">
+                                    <i class="fas fa-clock"></i>
+                                    <span>+8 min delay</span>
+                                </div>
+                                <div class="route-speed">
+                                    <span class="speed-value">25</span>
+                                    <span class="speed-unit">km/h</span>
+                                </div>
+                            </div>
+                            <div class="route-trend">
+                                <div class="mini-trend">
+                                    <div class="trend-bar" style="height: 70%"></div>
+                                    <div class="trend-bar" style="height: 60%"></div>
+                                    <div class="trend-bar" style="height: 50%"></div>
+                                    <div class="trend-bar active" style="height: 60%"></div>
+                                </div>
+                                <span class="trend-indicator up">
+                                    <i class="fas fa-arrow-up"></i> Slight increase
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="route-card">
+                            <div class="route-header">
+                                <h4>Rekai Tagwira</h4>
+                                <span class="traffic-badge green">Clear</span>
+                            </div>
+                            <div class="route-details">
+                                <div class="route-metric">
+                                    <i class="fas fa-car"></i>
+                                    <span>520 vehicles/hr</span>
+                                </div>
+                                <div class="route-metric">
+                                    <i class="fas fa-clock"></i>
+                                    <span>+2 min delay</span>
+                                </div>
+                                <div class="route-speed">
+                                    <span class="speed-value">45</span>
+                                    <span class="speed-unit">km/h</span>
+                                </div>
+                            </div>
+                            <div class="route-trend">
+                                <div class="mini-trend">
+                                    <div class="trend-bar" style="height: 50%"></div>
+                                    <div class="trend-bar" style="height: 45%"></div>
+                                    <div class="trend-bar" style="height: 30%"></div>
+                                    <div class="trend-bar active" style="height: 20%"></div>
+                                </div>
+                                <span class="trend-indicator down">
+                                    <i class="fas fa-arrow-down"></i> Improving
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="route-card">
+                            <div class="route-header">
+                                <h4>Main Street</h4>
+                                <span class="traffic-badge yellow">Moderate</span>
+                            </div>
+                            <div class="route-details">
+                                <div class="route-metric">
+                                    <i class="fas fa-car"></i>
+                                    <span>830 vehicles/hr</span>
+                                </div>
+                                <div class="route-metric">
+                                    <i class="fas fa-clock"></i>
+                                    <span>+12 min delay</span>
+                                </div>
+                                <div class="route-speed">
+                                    <span class="speed-value">22</span>
+                                    <span class="speed-unit">km/h</span>
+                                </div>
+                            </div>
+                            <div class="route-trend">
+                                <div class="mini-trend">
+                                    <div class="trend-bar" style="height: 30%"></div>
+                                    <div class="trend-bar" style="height: 45%"></div>
+                                    <div class="trend-bar" style="height: 60%"></div>
+                                    <div class="trend-bar active" style="height: 50%"></div>
+                                </div>
+                                <span class="trend-indicator down">
+                                    <i class="fas fa-arrow-down"></i> Stabilizing
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traffic Signals Status -->
+                <div class="traffic-signals">
+                    <h3>Signal Health Overview</h3>
+                    <div class="signal-status-container">
+                        <div class="signal-status-item">
+                            <div class="signal-icon operational">
+                                <i class="fas fa-traffic-light"></i>
+                            </div>
+                            <div class="signal-info">
+                                <h4>Operational</h4>
+                                <span class="signal-count">38</span>
+                            </div>
+                        </div>
+                        <div class="signal-status-item">
+                            <div class="signal-icon warning">
+                                <i class="fas fa-traffic-light"></i>
+                            </div>
+                            <div class="signal-info">
+                                <h4>Flashing</h4>
+                                <span class="signal-count">3</span>
+                            </div>
+                        </div>
+                        <div class="signal-status-item">
+                            <div class="signal-icon inactive">
+                                <i class="fas fa-traffic-light"></i>
+                            </div>
+                            <div class="signal-info">
+                                <h4>Inactive</h4>
+                                <span class="signal-count">1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two column layout for traffic data and alerts -->
+        <div class="dashboard-columns">
+            <!-- Traffic Data -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Traffic Density by Hour</h2>
+                </div>
+                <div class="chart-container">
+                    <!-- Chart would be embedded here through JavaScript (e.g. Chart.js) -->
+                    <div class="chart-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Interactive chart loads here</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Alerts -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Recent Alerts</h2>
+                </div>
+                <ul class="alert-list">
+                    <li class="alert-item">
+                        <div class="alert-icon critical">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Traffic Congestion</h4>
+                            <p>Heavy traffic on Second Street and Tongogara due to an accident</p>
+                            <span class="alert-time">35 minutes ago</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm">Resolve</button>
+                        </div>
+                    </li>
+                    <li class="alert-item">
+                        <div class="alert-icon warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Signal Malfunction</h4>
+                            <p>Traffic light on Samora and Rekai Tagwena is operating in flashing mode</p>
+                            <span class="alert-time">1 hour ago</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm">Resolve</button>
+                        </div>
+                    </li>
+                    <li class="alert-item">
+                        <div class="alert-icon info">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Traffic light down</h4>
+                            <p>Samora and Second Street</p>
+                            <span class="alert-time">2 hours ago</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm">Dismiss</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+    <!-- Google Maps API Script -->
+    <script>
+        // Global variables
+        let map;
+        let trafficLayer;
+        let trafficEnabled = true;
+        let defaultCenter = { lat: -17.8292, lng: 31.0522 }; // Harare, Zimbabwe (adjusted from San Francisco)
+        
+        // Initialize map when the API loads
+        function initMap() {
+            // Try to get user's location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        defaultCenter = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        createMap();
+                    },
+                    error => {
+                        console.log("Error getting location: ", error);
+                        createMap();
+                    }
+                );
+            } else {
+                createMap();
+            }
+        }
+        
+        // Create the map with traffic layer
+        function createMap() {
+            // Create map instance
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: defaultCenter,
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            
+            // Add traffic layer
+            trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+            
+            // Set up traffic toggle button
+            document.getElementById('toggleTraffic').addEventListener('click', function() {
+                if (trafficEnabled) {
+                    trafficLayer.setMap(null);
+                    trafficEnabled = false;
+                    this.innerHTML = '<i class="fas fa-layer-group"></i> Show Traffic';
+                } else {
+                    trafficLayer.setMap(map);
+                    trafficEnabled = true;
+                    this.innerHTML = '<i class="fas fa-layer-group"></i> Hide Traffic';
+                }
+            });
+            
+            // Set up refresh button
+            document.getElementById('refreshMap').addEventListener('click', function() {
+                if (trafficEnabled) {
+                    trafficLayer.setMap(null);
+                    trafficLayer = new google.maps.TrafficLayer();
+                    trafficLayer.setMap(map);
+                }
+                updateTrafficSummary();
+            });
+            
+            // Populate traffic summary initially
+            updateTrafficSummary();
+        }
+        
+        // Function to update traffic summary with real-time data
+        function updateTrafficSummary() {
+            // In a real implementation, this would fetch data from your backend
+            // For demo purposes, we'll just update the timestamp
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = hours % 12 || 12;
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const timeString = `${formattedHours}:${formattedMinutes} ${ampm}`;
+            
+            document.getElementById('updateTime').textContent = timeString;
+            
+            // Animation for refresh button to indicate updating
+            const refreshBtn = document.getElementById('refreshSummary');
+            refreshBtn.classList.add('rotating');
+            setTimeout(() => {
+                refreshBtn.classList.remove('rotating');
+            }, 1000);
+        }
+        
+        // Add event listener for summary refresh button
+        document.addEventListener('DOMContentLoaded', function() {
+            const refreshSummaryBtn = document.getElementById('refreshSummary');
+            if (refreshSummaryBtn) {
+                refreshSummaryBtn.addEventListener('click', updateTrafficSummary);
+            }
+        });
+    </script>
+
+    <!-- Load Google Maps API with your key -->
+    <script async defer loading="async"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu-UD3Hd3Nt3LKnXVXj69zfaPU_Lnv4PY&callback=initMap">
+    </script>
+</body>
+</html>

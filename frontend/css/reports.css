@@ -1,0 +1,74 @@
+/* Styles specific to the traffic reports page */
+
+.reports-content {
+    padding: 20px;
+}
+
+.report-filters {
+    background-color: #f2f2f2;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.report-filters h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.report-filters .form-group {
+    margin-bottom: 10px;
+}
+
+.report-filters label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.report-filters select,
+.report-filters input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.report-filters input[type="date"] {
+    margin-right: 10px;
+}
+
+.report-filters button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.report-filters button:hover {
+    background-color: #1e7e34;
+}
+
+.report-results h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#report-data {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#report-data p {
+    color: #777;
+}
+
+/* Add more specific styles for tables, charts, etc., as needed */

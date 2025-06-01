@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Traffic Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="text-center">SMART TRAFFIC MANAGEMENT SYSTEM</h1>
+                <p class="text-center">WELCOME BACK</p>
+            </div>
+            
+            <div class="login-form">
+                <form id="loginForm" action="dashboard.html">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-user"></i></span>
+                            <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-lock"></i></span>
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group remember-me">
+                        <input type="checkbox" id="remember" class="form-checkbox">
+                        <label for="remember">Remember me</label>
+                        <a href="forgot.html" class="forgot-password">Forgot password?</a>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn login-btn">Login</button>
+                    </div>
+                    <div id="login-error" style="color: red; text-align:center; display:none; margin-top:10px;">
+                        Invalid username or password.
+                    </div>
+                    <div id="login-success" style="display:none; text-align: center; margin-top: 10px;"></div>
+                </form>
+            </div>
+            
+            <div class="login-footer text-center">
+                <p>&copy; 2025 Traffic Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Reports - Traffic Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reports.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container flex justify-between align-center">
+            <a href="dashboard.html" class="navbar-brand">
+                <i class="fas fa-traffic-light"></i> Traffic Management System
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link user-menu">
+                        <img src="https://via.placeholder.com/32" alt="User Avatar" class="user-avatar">
+                        <span>Admin User</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-item">
+                <a href="dashboard.html" class="sidebar-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="monitoring.html" class="sidebar-link">
+                    <i class="fas fa-video"></i>
+                    <span>Traffic Monitoring</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="reports.html" class="sidebar-link active">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports & Analytics</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="settings.html" class="sidebar-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="index.html" class="sidebar-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Traffic Reports & Analytics</h1>
+            <p>Generate comprehensive reports and analyze traffic patterns.</p>
+        </div>
+
+        <!-- Report Filters -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-filter"></i> Report Filters</h2>
+            </div>
+            <div class="card-body">
+                <form id="report-filter-form" class="form-grid">
+                    <div class="form-group">
+                        <label for="report-type">Report Type:</label>
+                        <select id="report-type" class="form-control">
+                            <option value="summary">Traffic Summary</option>
+                            <option value="congestion">Congestion Analysis</option>
+                            <option value="incident">Incident Log</option>
+                            <option value="flow">Traffic Flow Patterns</option>
+                            <option value="camera">Camera Status</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <select id="location" class="form-control">
+                            <option value="all">All Locations</option>
+                            <option value="junction_a">Junction A - Samora and Leopold Takawira</option>
+                            <option value="junction_b">Junction B - Samora & 4th Street</option>
+                            <option value="junction_c">Junction C - Second Street and Churchil</option>
+                            <option value="junction_d">Junction D - Second Street and Tongogara</option>
+                            <option value="junction_e">Junction E - Samora and Rekai Tagwena</option>
+                            <option value="junction_f">Junction F - Samora and Bishop Gaul</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date-range">Date Range:</label>
+                        <div class="flex gap-2 align-center">
+                            <input type="date" id="start-date" class="form-control" value="2025-05-12">
+                            <span>to</span>
+                            <input type="date" id="end-date" class="form-control" value="2025-05-19">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time-range">Time Range:</label>
+                        <div class="flex gap-2 align-center">
+                            <select id="start-time" class="form-control">
+                                <option value="00:00">12:00 AM</option>
+                                <option value="06:00">6:00 AM</option>
+                                <option value="08:00" selected>8:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="20:00">8:00 PM</option>
+                            </select>
+                            <span>to</span>
+                            <select id="end-time" class="form-control">
+                                <option value="08:00">8:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                                <option value="20:00" selected>8:00 PM</option>
+                                <option value="23:59">11:59 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="traffic-condition">Traffic Condition:</label>
+                        <select id="traffic-condition" class="form-control">
+                            <option value="all">All Conditions</option>
+                            <option value="light">Light Traffic</option>
+                            <option value="moderate">Moderate Traffic</option>
+                            <option value="heavy">Heavy Traffic</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="incident-type">Incident Type:</label>
+                        <select id="incident-type" class="form-control">
+                            <option value="all">All Incidents</option>
+                            <option value="congestion">Traffic Congestion</option>
+                            <option value="accident">Accidents</option>
+                            <option value="malfunction">Signal Malfunction</option>
+                            <option value="construction">Road Construction</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group flex gap-2 mt-3">
+                        <button type="button" id="generate-report-btn" class="btn btn-primary">
+                            <i class="fas fa-chart-line"></i> Generate Report
+                        </button>
+                        <button type="button" id="export-report-btn" class="btn">
+                            <i class="fas fa-file-export"></i> Export Report
+                        </button>
+                        <button type="reset" class="btn btn-outline">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Report Results -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <div class="flex justify-between align-center">
+                    <h2><i class="fas fa-chart-bar"></i> Report Results</h2>
+                    <div class="report-actions">
+                        <button id="print-report" class="btn btn-sm">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                        <button id="share-report" class="btn btn-sm">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body" id="report-container">
+                <div id="report-loading" class="text-center p-4 d-none">
+                    <i class="fas fa-spinner fa-spin fa-3x"></i>
+                    <p>Generating report...</p>
+                </div>
+                
+                <div id="report-empty" class="text-center p-4">
+                    <i class="fas fa-chart-bar fa-3x text-muted"></i>
+                    <p class="mt-2">No report data available yet. Please apply filters and click "Generate Report".</p>
+                </div>
+                
+                <div id="report-data" class="d-none">
+                    <!-- Report Content Will Be Generated Here -->
+                    <div class="report-header">
+                        <h3>Traffic Summary Report</h3>
+                        <p class="report-meta">Period: May 12, 2025 - May 19, 2025 | Generated on: May 19, 2025</p>
+                    </div>
+                    
+                    <!-- Traffic Overview -->
+                    <div class="report-section">
+                        <h4>Traffic Overview</h4>
+                        <div class="report-charts flex gap-2">
+                            <div class="chart-container">
+                                <canvas id="trafficOverviewChart"></canvas>
+                            </div>
+                            <div class="stats-container">
+                                <div class="stat-card">
+                                    <div class="stat-value">2,548</div>
+                                    <div class="stat-label">Average Daily Vehicles</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">18%</div>
+                                    <div class="stat-label">Congestion Increase</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">8:15 AM</div>
+                                    <div class="stat-label">Peak Traffic Time</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">5</div>
+                                    <div class="stat-label">Critical Incidents</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Traffic by Location -->
+                    <div class="report-section">
+                        <h4>Traffic by Location</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Junction</th>
+                                    <th>Average Traffic</th>
+                                    <th>Peak Hours</th>
+                                    <th>Incidents</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Junction A - Samora and Leopold Takawira</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 65%;">65%</div>
+                                        </div>
+                                    </td>
+                                    <td>8:00 AM - 9:30 AM</td>
+                                    <td>1</td>
+                                    <td><span class="badge badge-success">Normal</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Junction B - Samora & 4th Street</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 75%;">75%</div>
+                                        </div>
+                                    </td>
+                                    <td>5:00 PM - 6:30 PM</td>
+                                    <td>0</td>
+                                    <td><span class="badge badge-warning">Moderate</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Junction C - Second Street and Churchil</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 90%;">90%</div>
+                                        </div>
+                                    </td>
+                                    <td>8:15 AM - 10:00 AM</td>
+                                    <td>2</td>
+                                    <td><span class="badge badge-danger">Congested</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Junction D - Second Street and Tongogara</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 40%;">40%</div>
+                                        </div>
+                                    </td>
+                                    <td>N/A</td>
+                                    <td>0</td>
+                                    <td><span class="badge badge-secondary">Offline</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Junction E - Samora and Rekai Tagwena</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 70%;">70%</div>
+                                        </div>
+                                    </td>
+                                    <td>4:30 PM - 6:00 PM</td>
+                                    <td>1</td>
+                                    <td><span class="badge badge-warning">Moderate</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Junction F - Samora and Bishop Gaul</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 45%;">45%</div>
+                                        </div>
+                                    </td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                    <td>1</td>
+                                    <td><span class="badge badge-success">Normal</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Incident Summary -->
+                    <div class="report-section">
+                        <h4>Incident Summary</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Location</th>
+                                        <th>Type</th>
+                                        <th>Duration</th>
+                                        <th>Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>May 19, 2025</td>
+                                        <td>10:23 AM</td>
+                                        <td>Junction C - Second Street and Churchil</td>
+                                        <td>Traffic Congestion</td>
+                                        <td>1h 45m</td>
+                                        <td>Moderate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>May 19, 2025</td>
+                                        <td>09:45 AM</td>
+                                        <td>Junction A - Samora and Leopold Takawira</td>
+                                        <td>Minor Accident</td>
+                                        <td>2h 10m</td>
+                                        <td>High</td>
+                                    </tr>
+                                    <tr>
+                                        <td>May 19, 2025</td>
+                                        <td>08:12 AM</td>
+                                        <td>Junction E - Samora and Rekai Tagwena</td>
+                                        <td>Signal Malfunction</td>
+                                        <td>0h 45m</td>
+                                        <td>Low</td>
+                                    </tr>
+                                    <tr>
+                                        <td>May 17, 2025</td>
+                                        <td>17:35 PM</td>
+                                        <td>Junction C - Second Street and Churchil</td>
+                                        <td>Traffic Congestion</td>
+                                        <td>1h 20m</td>
+                                        <td>Moderate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>May 15, 2025</td>
+                                        <td>08:05 AM</td>
+                                        <td>Junction F - Samora and Bishop Gaul</td>
+                                        <td>Road Construction</td>
+                                        <td>5h 30m</td>
+                                        <td>Moderate</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommendations -->
+                    <div class="report-section">
+                        <h4>Recommendations</h4>
+                        <ul class="recommendation-list">
+                            <li>
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Adjust signal timing at Junction C during morning rush hour to alleviate congestion</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Investigate frequent signal malfunctions at Junction E and schedule maintenance</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Deploy traffic officers at Junction A between 8:00 AM - 9:30 AM to manage flow</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Restore offline camera at Junction D to improve monitoring capabilities</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Consider implementing lane adjustments at Junction B to ease afternoon congestion</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Saved Reports -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2><i class="fas fa-save"></i> Saved Reports</h2>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Report Name</th>
+                            <th>Type</th>
+                            <th>Date Range</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly Traffic Summary - April 2025</td>
+                            <td>Summary</td>
+                            <td>Apr 1 - Apr 30, 2025</td>
+                            <td>May 2, 2025</td>
+                            <td>
+                                <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                                <button class="btn btn-sm"><i class="fas fa-download"></i></button>
+                                <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Congestion Analysis - Downtown</td>
+                            <td>Congestion</td>
+                            <td>Apr 15 - May 15, 2025</td>
+                            <td>May 16, 2025</td>
+                            <td>
+                                <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                                <button class="btn btn-sm"><i class="fas fa-download"></i></button>
+                                <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Junction C Incident Report</td>
+                            <td>Incident</td>
+                            <td>May 1 - May 18, 2025</td>
+                            <td>May 18, 2025</td>
+                            <td>
+                                <button class="btn btn-sm"><i class="fas fa-eye"></i></button>
+                                <button class="btn btn-sm"><i class="fas fa-download"></i></button>
+                                <button class="btn btn-sm"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/reports.js"></script>
+    <script>
+        // Sample code to demonstrate report generation
+        document.getElementById('generate-report-btn').addEventListener('click', function() {
+            // Show loading state
+            document.getElementById('report-empty').classList.add('d-none');
+            document.getElementById('report-loading').classList.remove('d-none');
+            
+            // Simulate report generation
+            setTimeout(function() {
+                document.getElementById('report-loading').classList.add('d-none');
+                document.getElementById('report-data').classList.remove('d-none');
+                
+                // Initialize chart
+                const ctx = document.getElementById('trafficOverviewChart').getContext('2d');
+                const trafficChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['May 12', 'May 13', 'May 14', 'May 15', 'May 16', 'May 17', 'May 18', 'May 19'],
+                        datasets: [{
+                            label: 'Traffic Volume',
+                            data: [1850, 2100, 1950, 2300, 2450, 1800, 1700, 2548],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Weekly Traffic Volume'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

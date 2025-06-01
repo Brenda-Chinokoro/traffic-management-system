@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Traffic Management System</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #111; /* Dark background for neon effect */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); /* Subtle glow */
+        }
+
+        .neon-text {
+            font-size: 1.5em;
+            color: #0ff; /* Cyan neon color */
+            text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+            animation: bounce 1s infinite alternate, color-change 2s infinite alternate;
+        }
+
+        .info-text {
+            margin-top: 20px;
+            line-height: 1.6;
+            color: #eee;
+        }
+
+        .email {
+            color: #f0f; /* Magenta neon color */
+            text-shadow: 0 0 5px #f0f, 0 0 10px #f0f, 0 0 20px #f0f;
+            font-weight: bold;
+        }
+
+        .contact {
+            color: #0f0; /* Green neon color */
+            text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @keyframes color-change {
+            0% { color: #0ff; text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff; }
+            50% { color: #f0f; text-shadow: 0 0 5px #f0f, 0 0 10px #f0f, 0 0 20px #f0f; }
+            100% { color: #0f0; text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="neon-text">Please contact the administration if you have forgotten your password.</p>
+        <p class="info-text">
+            The email address to reach us is: <span class="email">admin@contact.gmail</span>.
+            <br>
+            You can also contact us via phone at: <span class="contact">+2637789066378</span>.
+            <br><br>
+            For our privacy policy, we cannot reset your password from here. Thank you!
+            <a href="index.html" class="forgot-password">LOGIN PAGE</a>
+        </p>
+    </div>
+</body>
+</html>
